@@ -522,7 +522,7 @@ priority: debug
 # When enabled, Falco will output alert messages and rules file
 # loading/validation results in JSON format, making it easier for downstream
 # programs to process and consume the data. By default, this option is disabled.
-json_output: false
+json_output: true
 
 # [Stable] `json_include_output_property`
 #
