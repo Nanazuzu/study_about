@@ -691,9 +691,9 @@ syslog_output:
 # message. Furthermore, the file will be closed and reopened if Falco receives
 # the SIGUSR1 signal.
 file_output:
-  enabled: true`
+  enabled: true
   keep_alive: false
-  filename: /var/log/falco_events.txt
+  filename: /var/log/falco_events.json
 
 # [Stable] `http_output`
 #
