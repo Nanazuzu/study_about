@@ -480,7 +480,7 @@ plugins:
   - name: json
     library_path: libjson.so
   - name: container
-    library_path: /usr/lib/falco/plugins/libcontainer.so
+    library_path: /usr/share/falco/plugins/libcontainer.so
     init_config: ""
     open_params: ""
 
@@ -691,7 +691,7 @@ syslog_output:
 # message. Furthermore, the file will be closed and reopened if Falco receives
 # the SIGUSR1 signal.
 file_output:
-  enabled: true
+  enabled: true`
   keep_alive: false
   filename: /var/log/falco_events.txt
 
