@@ -460,7 +460,7 @@ engine:
 # For example, if you want to use the `k8saudit` plugin,
 # ensure it is configured appropriately and then change this to: 
 # load_plugins: [k8saudit, json]
-load_plugins: [container]
+# load_plugins: [container]
 
 # Customize subsettings for each enabled plugin. These settings will only be
 # applied when the corresponding plugin is enabled using the `load_plugins`
@@ -479,10 +479,10 @@ plugins:
     # https://github.com/falcosecurity/plugins/blob/master/plugins/cloudtrail/README.md
   - name: json
     library_path: libjson.so
-  - name: container
-    library_path: /usr/share/falco/plugins/libcontainer.so
-    init_config: ""
-    open_params: ""
+  # - name: container
+  #   library_path: /usr/share/falco/plugins/libcontainer.so
+  #   init_config: ""
+  #   open_params: ""
 
 # [Sandbox] `plugins_hostinfo`
 #
