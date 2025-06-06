@@ -27,17 +27,26 @@ with open(falco_log_path, "r") as f:
             time.sleep(0.2)
             continue
 
+        print(f"[DEBUG] Raw line: {line.strip()}")  # 🚀 Falco 로그 한 줄 확인
+
         try:
             log = json.loads(line.strip())
+            print(f"[DEBUG] Parsed log: {log}")  # 🚀 json.loads 성공 여부 확인
         except json.JSONDecodeError:
+            print(f"[DEBUG] JSON decode failed")
             continue
 
         pid = log.get("pid")
         rule = log.get("rule")
         output = log.get("output")
 
-        if pid is None or pid in sent_pids:
-            continue  # PID 필터링
+        if pid is None:
+            print(f"[DEBUG] Skipping log with no pid: {log}")
+            continue
+
+        if pid in sent_pids:
+            print(f"[DEBUG] Skipping duplicate pid: {pid}")
+            continue
 
         sent_pids.add(pid)
 
@@ -50,7 +59,7 @@ with open(falco_log_path, "r") as f:
                 span.set_attribute("falco.priority", log.get("priority", "N/A"))
                 span.set_attribute("falco.time", log.get("time", "N/A"))
 
-                print(f"[Trace] Sent for PID: {pid} | Rule: {rule}")
                 print(f"[Trace ✅] Sent for PID: {pid} | Rule: {rule}")
+
         except Exception as e:
             print(f"[Trace ❌] Failed to send span for PID: {pid} | Error: {e}")
