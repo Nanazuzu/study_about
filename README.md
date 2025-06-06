@@ -15,7 +15,7 @@ sudo cp ./*.yaml /etc/falco/
 ```
 
 ### `.py` 파일
-- Falco와 OTEL연결 파일 실행
+- Falco와 OTEL연결 파일
 
 실행 방법:
 ```bash
