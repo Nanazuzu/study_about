@@ -12,3 +12,9 @@
 설치 경로:
 ```bash
 sudo cp ./*.yaml /etc/falco/
+
+### `.py` 파일
+- Falco와 OTEL연결 파일 실행
+실행 방법:
+```bash
+(venv에서) python (.py파일 이름)
