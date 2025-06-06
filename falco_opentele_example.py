@@ -42,12 +42,15 @@ with open(falco_log_path, "r") as f:
         sent_pids.add(pid)
 
         # === 4. OpenTelemetry Trace 생성 ===
-        with tracer.start_as_current_span(f"FalcoAlert: {rule}") as span:
-            span.set_attribute("falco.rule", rule)
-            span.set_attribute("falco.pid", pid)
-            span.set_attribute("falco.output", output)
-            span.set_attribute("falco.priority", log.get("priority", "N/A"))
-            span.set_attribute("falco.time", log.get("time", "N/A"))
+        try:
+            with tracer.start_as_current_span(f"FalcoAlert: {rule}") as span:
+                span.set_attribute("falco.rule", rule)
+                span.set_attribute("falco.pid", pid)
+                span.set_attribute("falco.output", output)
+                span.set_attribute("falco.priority", log.get("priority", "N/A"))
+                span.set_attribute("falco.time", log.get("time", "N/A"))
 
-            print(f"[Trace] Sent for PID: {pid} | Rule: {rule}")
-
+                print(f"[Trace] Sent for PID: {pid} | Rule: {rule}")
+                print(f"[Trace ✅] Sent for PID: {pid} | Rule: {rule}")
+        except Exception as e:
+            print(f"[Trace ❌] Failed to send span for PID: {pid} | Error: {e}")
