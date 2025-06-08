@@ -1,0 +1,28 @@
+receivers:
+  otlp:
+    protocols:
+      grpc:
+      http:
+
+processors:
+  webhook/sigma:
+    endpoint: "http://localhost:8000/match"
+    method: POST
+    timeout: 500ms
+
+  batch:
+
+exporters:
+  jaeger:
+    endpoint: "http://localhost:14250"
+    tls:
+      insecure: true
+  logging:
+    loglevel: debug
+
+service:
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [webhook/sigma, batch]
+      exporters: [jaeger, logging]
