@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Request
 import json
-from pysigma.parser import SigmaCollectionParser
-from pysigma.collection import SigmaCollection
+from sigma.parser.collection import SigmaCollectionParser
+from sigma.collection import SigmaCollection
 
 app = FastAPI()
 
